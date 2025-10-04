@@ -1,0 +1,104 @@
+/*
+===================================
+COUNTDOWN TIMER - ELEGANT GLASS STYLE
+===================================
+*/
+.simply-countdown {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem; /* Sedikit lebih banyak ruang antar lingkaran */
+  margin: auto;
+}
+
+.simply-countdown > .simply-section {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  /* EFEK KACA (GLASSMORPHISM) */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.15
+  ); /* Latar belakang transparan dengan sedikit hint putih */
+  backdrop-filter: blur(8px); /* Ini yang membuat efek kaca buram */
+  -webkit-backdrop-filter: blur(8px); /* Dukungan untuk browser Safari */
+  border: 1.5px solid rgba(255, 255, 255, 0.3); /* Garis tepi tipis untuk menonjolkan efek kaca */
+  box-shadow: var(--shadow-soft); /* Bayangan lembut agar terangkat */
+
+  /* Animasi masuk */
+  animation: fadeZoomIn 0.6s ease-out both;
+}
+
+.simply-countdown > .simply-section .simply-amount,
+.simply-countdown > .simply-section .simply-word {
+  display: block;
+  text-align: center;
+  color: white; /* Pastikan warna teks putih */
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan teks agar mudah dibaca */
+}
+
+.simply-countdown > .simply-section .simply-amount {
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.simply-countdown > .simply-section .simply-word {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+/* ======== ANIMASI ======== */
+@keyframes fadeZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+  .simply-countdown {
+    gap: 1rem;
+  }
+  .simply-countdown > .simply-section {
+    width: 80px;
+    height: 80px;
+  }
+  .simply-countdown > .simply-section .simply-amount {
+    font-size: 1.8rem;
+  }
+  .simply-countdown > .simply-section .simply-word {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .simply-countdown {
+    gap: 0.5rem;
+  }
+  .simply-countdown > .simply-section {
+    width: 70px;
+    height: 70px;
+  }
+  .simply-countdown > .simply-section .simply-amount {
+    font-size: 1.5rem;
+  }
+  .simply-countdown > .simply-section .simply-word {
+    font-size: 0.6rem;
+  }
+}

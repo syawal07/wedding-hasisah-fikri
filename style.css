@@ -1,0 +1,611 @@
+/*
+===================================
+IKRAM & NISA WEDDING - ELEGANT STYLESHEET
+===================================
+*/
+
+/* -----------------------------------
+1. KONFIGURASI DASAR & VARIABEL
+-----------------------------------
+*/
+:root {
+  --pink: #b03052;
+  --bg-dark: #0c0950;
+  --text-light: #f5f5f5;
+  --text-dark: #444;
+  --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+  --font-heading: "Sacramento", cursive;
+  --font-body: "Work Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  background-color: #fff;
+}
+
+/* -----------------------------------
+2. UTILITIES & KELAS BANTU
+-----------------------------------
+*/
+.section-title {
+  color: var(--pink);
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+/* Animasi untuk elemen yang muncul saat di-scroll */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -----------------------------------
+3. HERO SECTION
+-----------------------------------
+*/
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--text-light);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Gunakan multiple background untuk overlay */
+  background-image: 
+    /* 1. Gradient Overlay dari bawah ke atas */ linear-gradient(
+      to top,
+      rgba(12, 9, 80, 0.6),
+      transparent 50%
+    ),
+    /* 2. Gambar Asli Anda */ url(img/bg-prewed.jpg);
+
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+
+  /* Filter yang lebih lembut */
+  filter: saturate(1.1) brightness(0.9); /* Sedikit menaikkan saturasi & brightness agar tidak kusam */
+
+  /* Animasi Ken Burns yang lebih dinamis */
+  animation: kenBurnsEffect 50s ease-in-out infinite alternate;
+}
+
+/* Tambahkan atau ganti keyframes ini di CSS Anda */
+@keyframes kenBurnsEffect {
+  from {
+    /* Mulai dengan sedikit zoom dan posisi tertentu */
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    /* Selesai dengan zoom lebih besar dan geser sedikit */
+    transform: scale(1.15) translate(-3%, 2%);
+  }
+}
+.hero main {
+  padding: 2rem;
+  z-index: 1;
+  animation: fadeIn 2s ease-out forwards;
+}
+
+.hero h1,
+.hero h4,
+.hero p {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+}
+
+.hero h4 {
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin-top: -1rem;
+}
+
+.hero p {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+}
+
+.hero .btn {
+  background-color: white;
+  color: var(--pink);
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 0.8rem 2.5rem;
+  box-shadow: var(--shadow-medium);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+  margin-top: 2rem;
+}
+
+.hero .btn:hover {
+  background-color: var(--pink);
+  color: white;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* -----------------------------------
+4. NAVBAR
+-----------------------------------
+*/
+.mynavbar {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  transition: background-color 0.4s ease;
+}
+
+.mynavbar .navbar-brand,
+.mynavbar .offcanvas-title {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--pink);
+}
+
+.mynavbar .nav-link {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  position: relative;
+  padding: 0.5rem 0;
+  margin: 0 1rem;
+  transition: color 0.3s ease;
+}
+
+.mynavbar .nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--pink);
+  transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.mynavbar .nav-link:hover {
+  color: var(--pink);
+}
+
+.mynavbar .nav-link:hover::after {
+  width: 100%;
+}
+
+.mynavbar .offcanvas {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+}
+
+/* -----------------------------------
+5. SECTIONS (Home, Info, etc.)
+-----------------------------------
+*/
+.home,
+.story,
+.gallery,
+.rsvp,
+.gifts,
+.info {
+  padding-top: 10rem;
+  padding-bottom: 8rem;
+}
+
+.home {
+  background-image: url(img/bg.png);
+  background-size: cover;
+  margin-top: -6rem;
+  padding-top: 15rem;
+}
+
+.home h3 {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.home p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.7;
+}
+
+.home .couple {
+  margin-top: 100px;
+}
+
+.home .couple h3 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--pink);
+}
+
+.home .couple img {
+  width: 100%;
+  box-shadow: var(--shadow-medium);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.home .couple img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.home .heart {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: var(--shadow-soft);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(65px);
+  z-index: 1;
+}
+
+.home .heart i {
+  color: var(--pink);
+  font-size: 1.5rem;
+}
+
+/* INFO SECTION */
+.info {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+#info .section-title {
+  color: white; /* Override khusus untuk section info */
+}
+
+.info .alamat,
+.info .description {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.info .card {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.info .card-header,
+.info .card-footer {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.info .card-header {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+}
+
+/* GALLERY SECTION */
+.gallery {
+  background-color: #f8f9fa;
+}
+
+/* RSVP SECTION */
+.rsvp {
+  background-color: var(--bg-dark);
+}
+
+.rsvp .section-title {
+  color: white;
+}
+
+.rsvp p,
+.rsvp form label {
+  color: var(--text-light);
+  font-weight: 300;
+}
+
+.rsvp button {
+  background-color: var(--pink);
+  color: white;
+  border: 1px solid var(--pink);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.rsvp button:hover {
+  background-color: white;
+  color: var(--pink);
+  border: 1px solid white;
+}
+
+/* TIMELINE (Story Section) */
+.timeline {
+  list-style: none;
+  padding: 1.4rem 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  width: 2px;
+  background-color: #e9ecef;
+  left: 50%;
+  margin-left: -1px;
+}
+
+.timeline li {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.timeline li::before,
+.timeline li::after {
+  content: "";
+  display: table;
+}
+
+.timeline li::after {
+  clear: both;
+}
+
+.timeline li .timeline-image {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 7px solid #e9ecef;
+}
+
+.timeline li .timeline-panel {
+  width: 42%;
+  float: left;
+  border: 1px solid #e9ecef;
+  padding: 2rem;
+  position: relative;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: var(--shadow-soft);
+}
+
+.timeline li.timeline-inverted .timeline-panel {
+  float: right;
+}
+
+/* Arrow pointers for timeline */
+.timeline li .timeline-panel::before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-style: solid;
+  border-width: 10px;
+  top: 30px;
+}
+
+.timeline li:not(.timeline-inverted) .timeline-panel::before {
+  border-color: transparent transparent transparent #e9ecef;
+  right: -21px;
+}
+
+.timeline li.timeline-inverted .timeline-panel::before {
+  border-color: transparent #e9ecef transparent transparent;
+  left: -21px;
+}
+
+/* -----------------------------------
+6. KOMPONEN LAIN
+-----------------------------------
+*/
+/* GOOGLE MAP */
+.map-responsive {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  border-radius: 8px;
+}
+
+.map-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* AUDIO ICON */
+.audio-icon-wrapper {
+  width: 4rem;
+  height: 4rem;
+  font-size: 2.5rem;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  cursor: pointer;
+  z-index: 999;
+  color: var(--pink);
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--shadow-medium);
+  animation: rotateDisc 4s linear infinite;
+}
+
+.audio-icon-wrapper i {
+  font-size: 2rem;
+}
+
+/* -----------------------------------
+7. FOOTER
+-----------------------------------
+*/
+footer {
+  padding: 3rem;
+  background-color: var(--bg-dark);
+  color: white;
+}
+
+footer a {
+  color: var(--pink);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: white;
+}
+
+footer li {
+  list-style: none;
+  display: inline;
+  margin: 0.5rem;
+}
+
+/* -----------------------------------
+8. ANIMASI KEYFRAMES
+-----------------------------------
+*/
+@keyframes zoomParallax {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotateDisc {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -----------------------------------
+9. RESPONSIVE DESIGN
+-----------------------------------
+*/
+@media (max-width: 992px) {
+  .section-title {
+    font-size: 4rem;
+  }
+  .timeline li .timeline-panel {
+    width: 40%;
+  }
+  .timeline li .timeline-image {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 3rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+  }
+  .hero h4 {
+    font-size: 1.3rem;
+  }
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  /* TIMELINE RESPONSIVE */
+  .timeline::before {
+    left: 40px;
+  }
+  .timeline li .timeline-image {
+    left: 40px;
+    width: 80px;
+    height: 80px;
+  }
+  .timeline li .timeline-panel {
+    width: calc(100% - 90px);
+    float: right;
+  }
+  .timeline li .timeline-panel::before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    left: -15px;
+    right: auto;
+  }
+  .timeline li.timeline-inverted .timeline-panel {
+    float: right;
+  }
+  .timeline li.timeline-inverted .timeline-panel::before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    left: -15px;
+    right: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+  .home .couple h3 {
+    font-size: 2.5rem;
+  }
+}
